@@ -26,6 +26,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.slf4j.Logger;
 
+import static com.aviatorrob06.forglory.common.blocks.cobblelight.COBBLELIGHT;
+
 
 @Mod(ForGlory.MODID)
 public class ForGlory
@@ -34,13 +36,21 @@ public class ForGlory
     public static final String MODID = "forglory";
   
     private static final Logger LOGGER = LogUtils.getLogger();
-  
+
+    private static final DeferredRegister<Block> BLOCK_REGISTRY = DeferredRegister.create(ForgeRegistries.BLOCKS, MODID);
+    private static final DeferredRegister<Item> ITEM_REGISTRY = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
+    private static final DeferredRegister<Item> BLOCK_ENTITY_REGISTRY = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
+    public static final RegistryObject<Block> COBBLELIGHT_REGISTRATION = BLOCK_REGISTRY.register("cobblelight", () -> COBBLELIGHT);
+
     public ForGlory(){
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
+
+
+
         modEventBus.addListener(this::commonSetup);
 
-        MinecraftForge.EVENT_BUS.register(this);
+       BLOCK_REGISTRY.register(modEventBus);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event)
